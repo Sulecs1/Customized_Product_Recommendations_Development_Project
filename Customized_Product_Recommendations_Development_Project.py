@@ -19,11 +19,9 @@ data = pd.read_excel(r"C:\Users\Suleakcay\PycharmProjects\pythonProject6\dataset
 df = data.copy()
 df.info()
 
-
 ########################
 #Data Preprocessing
 ########################
-
 
 from helpers.helpers import check_df
 check_df(df) #verinin detayını aldık
@@ -79,11 +77,9 @@ rules = association_rules(frequent_itemsets, metric="support", min_threshold=0.0
 rules.head()
 rules.sort_values("lift", ascending=False).head()
 
-
 ############################################
 # Çalışmanın Fonksiyonlaştırılması
 ############################################
-
 
 import pandas as pd
 pd.set_option('display.max_columns', None)
