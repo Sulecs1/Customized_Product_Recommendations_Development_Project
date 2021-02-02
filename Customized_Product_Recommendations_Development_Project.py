@@ -1,14 +1,7 @@
 ############################################################
 # Customized Product Recommendations Development Project   #
 ############################################################
-#<<<Şule AKÇAY>>>
-
-# Amacımız retail_II veri setine birliktelik analizi uygulamak.
-
-# 1. Veri Ön İşleme
-#   1. Eksik değer, aykırı değer vs (rfm'deki klasik işler)
-#   2. Invoice product (basket product) matrisini oluşturmak
-# 2. Birliktelik Kurallarnın Çıkarılması
+#<<<Şule AKÇAY>>
 
 import datetime as dt
 import pandas as pd
@@ -62,14 +55,6 @@ df_fr.groupby(['Invoice', 'StockCode']).\
     agg({"Quantity": "sum"}).\
     unstack().fillna(0).iloc[0:5, 0:5] #nan değerlerine 0 koyduk yukarıdaki çıktıyı elde etmek için!
 
-#Yukarıdaki quantity bir değer olarak değilde 1  ya da 0 olarak almak istediğimiz için aşağıdaki işemi yaptık
-#df_fr.groupby(['Invoice', 'StockCode']).\
-#   agg({"Quantity": "sum"}).\
-#    unstack().fillna(0).\
-#   applymap(lambda x: 1 if x > 0 else 0).iloc[0:20, 0:20]
-#applymap() -> Tüm elemanlara çalışmasını istersek
-#apply() ->satır ve sutun için çalışır :)
-
 def create_invoice_product_df(dataframe):  #matrisi dataframe olarak aldık
     #StockCode
     return dataframe.groupby(['Invoice', 'Description'])['Quantity'].sum().unstack().fillna(0). \
@@ -80,11 +65,6 @@ def create_invoice_product_df(dataframe):  #matrisi dataframe olarak aldık
 germany_inv_pro_df = create_invoice_product_df(df_fr)
 #!!!! 1  ve 0 lar bir sepette ne kadar ürün olup olmadığını gösteriyor
 germany_inv_pro_df.head(220)
-
-
-# Çıtır ödev.
-# Her bir invoice'da kaç eşsiz ürün vardır. #apply().sum() yöntemini uygula!
-# Her bir product kaç eşsiz sepettedir. #nunique()
 
 
 ############################################
